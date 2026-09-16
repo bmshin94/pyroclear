@@ -957,19 +957,19 @@ pub fn run_dashboard(
 
             // Row 2: Tab Bar
             let tab0_str = if active_tab == 0 {
-                format!("{ESC}[48;2;255;165;45m{ESC}[1;38;2;15;15;28m 🎨 Browse Palettes {ESC}[0m")
+                format!("{ESC}[48;2;255;165;45m{ESC}[1;38;2;15;15;28m   Browse Palettes {ESC}[0m")
             } else {
-                format!("{ESC}[38;2;160;160;185m 🎨 Browse Palettes {ESC}[0m")
+                format!("{ESC}[38;2;160;160;185m   Browse Palettes {ESC}[0m")
             };
             let tab1_str = if active_tab == 1 {
-                format!("{ESC}[48;2;255;165;45m{ESC}[1;38;2;15;15;28m ⚙️ Physics Settings {ESC}[0m")
+                format!("{ESC}[48;2;255;165;45m{ESC}[1;38;2;15;15;28m   Physics Settings {ESC}[0m")
             } else {
-                format!("{ESC}[38;2;160;160;185m ⚙️ Physics Settings {ESC}[0m")
+                format!("{ESC}[38;2;160;160;185m   Physics Settings {ESC}[0m")
             };
             let tab2_str = if active_tab == 2 {
-                format!("{ESC}[48;2;255;165;45m{ESC}[1;38;2;15;15;28m 🛠️ Custom Gradients {ESC}[0m")
+                format!("{ESC}[48;2;255;165;45m{ESC}[1;38;2;15;15;28m   Custom Gradients {ESC}[0m")
             } else {
-                format!("{ESC}[38;2;160;160;185m 🛠️ Custom Gradients {ESC}[0m")
+                format!("{ESC}[38;2;160;160;185m   Custom Gradients {ESC}[0m")
             };
 
             let tabs_combined = format!("{}  {}  {}", tab0_str, tab1_str, tab2_str);
