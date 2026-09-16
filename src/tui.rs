@@ -1234,9 +1234,10 @@ pub fn run_dashboard(
             // 5. Generate Content Lines for Right Pane (Preview and Specs)
             let mut right_lines = Vec::new();
 
-            // Calculate responsive sizes - fire preview box can now scale up to 32 rows tall
-            let prev_box_h = body_h.saturating_sub(6).clamp(8, 16);
-            let specs_box_h = body_h.saturating_sub(prev_box_h + 2);
+            // Specs panel is fixed at 6 rows (4 content lines + 2 border rows).
+            // Fire preview expands to fill all remaining vertical space.
+            let specs_box_h = 6usize;
+            let prev_box_h = body_h.saturating_sub(specs_box_h + 2).max(4);
 
 
             // Dynamic live fire preview tick & render based on active source type
