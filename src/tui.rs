@@ -465,19 +465,19 @@ fn format_setting_row(label: &str, value: &str, is_selected: bool) -> String {
         "  ".to_string()
     };
     let styled_label = if is_selected {
-        format!("{ESC}[1;38;2;255;255;255m{:<18}{ESC}[0m", label)
+        format!("{ESC}[1;38;2;255;255;255m{:<22}{ESC}[0m", label)
     } else {
-        format!("{ESC}[38;2;170;170;190m{:<18}{ESC}[0m", label)
+        format!("{ESC}[38;2;170;170;190m{:<22}{ESC}[0m", label)
     };
     let val_str = if is_selected {
         format!(
-            "{ESC}[38;2;255;200;80m◀ {ESC}[1;38;2;255;255;255m{:<14}{ESC}[0m{ESC}[38;2;255;200;80m ▶{ESC}[0m",
+            "{ESC}[38;2;255;200;80m◀ {ESC}[1;38;2;255;255;255m{:<18}{ESC}[0m{ESC}[38;2;255;200;80m ▶{ESC}[0m",
             value
         )
     } else {
-        format!("  {:<14}  ", value)
+        format!("  {:<18}  ", value)
     };
-    pad_right(&format!("{}{}{}", indicator, styled_label, val_str), 42)
+    pad_right(&format!("{}{}{}", indicator, styled_label, val_str), 54)
 }
 
 // ── Unified Dashboard Runner ──────────────────────────────────────────
@@ -946,8 +946,8 @@ pub fn run_dashboard(
             let mut buf = String::with_capacity(cols * rows * 24);
 
             // Row 1: Outer top frame border
-            let left_w = 42usize;
-            let right_w = cols.saturating_sub(49);
+            let left_w = 54usize;
+            let right_w = cols.saturating_sub(61);
             let top_border = format!(
                 "╭─{}─┬─{}─╮",
                 "─".repeat(left_w),
@@ -1054,9 +1054,9 @@ pub fn run_dashboard(
                         };
 
                         let name_styled = if is_sel {
-                            format!("{ESC}[1;38;2;255;255;255m{:<14}{ESC}[0m", truncate_display(&display_name, 14))
+                            format!("{ESC}[1;38;2;255;255;255m{:<20}{ESC}[0m", truncate_display(&display_name, 20))
                         } else {
-                            format!("{ESC}[38;2;160;160;180m{:<14}{ESC}[0m", truncate_display(&display_name, 14))
+                            format!("{ESC}[38;2;160;160;180m{:<20}{ESC}[0m", truncate_display(&display_name, 20))
                         };
 
                         let entry_line = format!("{}{}{}  {}", indicator, name_styled, swatch_str, hex_str);
@@ -1211,9 +1211,9 @@ pub fn run_dashboard(
                                 };
 
                                 let name_styled = if is_sel {
-                                    format!("{ESC}[1;38;2;255;255;255m{:<14}{ESC}[0m", truncate_display(&entry.display, 14))
+                                    format!("{ESC}[1;38;2;255;255;255m{:<20}{ESC}[0m", truncate_display(&entry.display, 20))
                                 } else {
-                                    format!("{ESC}[38;2;160;160;180m{:<14}{ESC}[0m", truncate_display(&entry.display, 14))
+                                    format!("{ESC}[38;2;160;160;180m{:<20}{ESC}[0m", truncate_display(&entry.display, 20))
                                 };
 
                                 let from_rgb = hex_to_rgb(&entry.from).unwrap_or((0, 0, 0));
@@ -1235,7 +1235,7 @@ pub fn run_dashboard(
             let mut right_lines = Vec::new();
 
             // Calculate responsive sizes - fire preview box can now scale up to 32 rows tall
-            let prev_box_h = body_h.saturating_sub(6).clamp(10, 32);
+            let prev_box_h = body_h.saturating_sub(6).clamp(8, 16);
             let specs_box_h = body_h.saturating_sub(prev_box_h + 2);
 
 
